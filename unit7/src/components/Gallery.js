@@ -1,6 +1,6 @@
 import React from 'react';
 import Photo from './Photo';
-import NotFound from './NoMatch';
+import NoMatch from './NoMatch';
 
 const Gallery = props => {
     const results = props.data;
@@ -15,7 +15,7 @@ const Gallery = props => {
                 secret={photo.secret}
             />)
     } else {
-        photoResult = <NotFound />
+        photoResult = <NoMatch />
     }
 
     return (

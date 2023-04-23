@@ -26,13 +26,13 @@ const App = (props) => {
       .then(response => {
         // handle success
         if (activeFetch === "cats") {
-          setPhotos(response.data.photos.photo);
+          setCats(response.data.photos.photo);
           setLoading(false);
         } else if (activeFetch === "dogs") {
-          setPhotos(response.data.photos.photo);
+          setDogs(response.data.photos.photo);
           setLoading(false);
         } else if (activeFetch === "computers") {
-          setPhotos(response.data.photos.photo);
+          setComputers(response.data.photos.photo);
           setLoading(false);
         } else {
           setPhotos(response.data.photos.photo);
@@ -48,7 +48,7 @@ const App = (props) => {
 
   return (
     <div>
-        <div className="inner">
+        <div className="container">
           <h1 className="main-title">Photo search</h1>
           <SearchForm />
         </div>

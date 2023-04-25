@@ -1,11 +1,15 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const SearchForm = props => {
   const searchText = useRef(null);
+  let navigate = useNavigate();
 
   const handleSubmit = e => {
     e.preventDefault();
     props.changeQuery(searchText.current.value);
+    let path = `search/${searchText}`;
+    navigate(path);
     e.currentTarget.reset()
   }
 

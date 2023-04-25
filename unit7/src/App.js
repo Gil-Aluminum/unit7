@@ -18,10 +18,10 @@ const App = (props) => {
   const [dogs, setDogs] = useState([]);
   const [computers, setComputers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
+  const searchForPhoto = (activeFetch = "cats") => {
     setLoading(true);
-    let activeFetch = "cats";
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${activeFetch}&per_page=24&format=json&nojsoncallback=1`)
       .then(response => {
         // handle success
@@ -44,13 +44,24 @@ const App = (props) => {
         console.log("Error fatching and parsing data", error);
       });
     return () => { activeFetch = false }
+  };
+
+  useEffect(() => {
+    searchForPhoto();
+    searchForPhoto('cats');
+    searchForPhoto('dogs')
+    searchForPhoto('computers')
   }, []);
+
+  const handleQueryChange = searchText =>{
+    setQuery(searchText);
+  }
 
   return (
     <div>
         <div className="container">
           <h1 className="main-title">Photo search</h1>
-          <SearchForm />
+          <SearchForm changeQuery={handleQueryChange} />
         </div>
         <div className="main-nav">
         <Nav />

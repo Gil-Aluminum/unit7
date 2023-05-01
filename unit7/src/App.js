@@ -47,11 +47,11 @@ const App = (props) => {
   };
 
   useEffect(() => {
-    searchForPhoto();
+    searchForPhoto(query);
     searchForPhoto('cats');
     searchForPhoto('dogs')
     searchForPhoto('computers')
-  }, []);
+  }, [query]);
 
   const handleQueryChange = searchText =>{
     setQuery(searchText);

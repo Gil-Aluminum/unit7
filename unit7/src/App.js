@@ -7,7 +7,6 @@ import './App.css';
 import SearchForm from "./components/SearchForm";
 import Gallery from "./components/Gallery";
 import Nav from "./components/Nav";
-import NoMatch from "./components/NoMatch";
 import NotFound from "./components/NotFound";
 import apiKey from "./config";
 
@@ -54,7 +53,6 @@ const App = (props) => {
     searchForPhoto('cats');
     searchForPhoto('dogs')
     searchForPhoto('computers')
-    searchForPhoto(location.pathname)
   }, [query]);
 
     // Listen to URL changes and update searchTerm
@@ -68,7 +66,7 @@ const App = (props) => {
   const handleQueryChange = searchText =>{
     setQuery(searchText);
   }
-  
+
   // Render components with React Router
   return (
     <div>

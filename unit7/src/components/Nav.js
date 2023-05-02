@@ -2,6 +2,7 @@ import React from 'react';
 import { Outlet, NavLink } from "react-router-dom"
 
 
+//nav links to easily display certain categories
 
 const Nav = () => (
   <div>

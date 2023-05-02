@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 import axios from "axios"
 import './App.css';
 
@@ -13,6 +13,8 @@ import apiKey from "./config";
 
 const App = (props) => {
 
+  // State variables
+  const location = useLocation();
   const [photos, setPhotos] = useState([]);
   const [cats, setCats] = useState([]);
   const [dogs, setDogs] = useState([]);
@@ -20,6 +22,7 @@ const App = (props) => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
 
+    // Fetch photos from Flickr API using axios
   const searchForPhoto = (activeFetch = "cats") => {
     setLoading(true);
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${activeFetch}&per_page=24&format=json&nojsoncallback=1`)
@@ -51,12 +54,22 @@ const App = (props) => {
     searchForPhoto('cats');
     searchForPhoto('dogs')
     searchForPhoto('computers')
+    searchForPhoto(location.pathname)
   }, [query]);
+
+    // Listen to URL changes and update searchTerm
+  useEffect(() => {
+    const pathname = location.pathname;
+    const searchTermFromPath = pathname.replace(pathname.includes('search') ? '/search/' : '/', '');
+    // Set searchTerm state to the search term in the URL, or 'cats' if none is present
+    setQuery(searchTermFromPath || 'cats');
+  }, [location.pathname]);
 
   const handleQueryChange = searchText =>{
     setQuery(searchText);
   }
-
+  
+  // Render components with React Router
   return (
     <div>
         <div className="container">

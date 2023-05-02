@@ -5,6 +5,7 @@ import NoMatch from './NoMatch';
 const Gallery = props => {
     const results = props.data;
     let photoResult;
+    //conditional that displays photo grid if results exist
     if (results.length > 0) {
         photoResult = results.map(photo =>
             <Photo
@@ -15,6 +16,7 @@ const Gallery = props => {
                 secret={photo.secret}
             />)
     } else {
+        //if not results, NoMatch component is called
         photoResult = <NoMatch />
     }
 
